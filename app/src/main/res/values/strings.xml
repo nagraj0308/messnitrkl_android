@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">messnitrkl_android</string>
+    <string name="app_name">Mess NITRKL</string>
+    <string name="hint_roll_no">Enter roll no…</string>
+    <string name="hint_mobile_no">Enter mobile no…</string>
+    <string name="hint_hostel">Select your hostel…</string>
+    <string name="login">Login</string>
+    <string name="tap_here_to_select_choice">Tap here to select choice…</string>
 </resources>
