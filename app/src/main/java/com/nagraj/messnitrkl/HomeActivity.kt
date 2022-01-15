@@ -1,13 +1,13 @@
 package com.nagraj.messnitrkl
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.nagraj.messnitrkl.common.Constants.Companion.CHOICE_CODE
 import com.nagraj.messnitrkl.common.Constants.Companion.CHOICE_NAME
+import com.nagraj.messnitrkl.common.Constants.Companion.checkTime
+import com.nagraj.messnitrkl.common.Constants.Companion.getChoice
 import com.nagraj.messnitrkl.select.SearchSelectFragment
 import com.nagraj.messnitrkl.common.Constants.Companion.toast
 import com.nagraj.messnitrkl.common.DataStorePreference
@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var dataStoreManager: DataStorePreference
     private var _binding: ActivityHomeBinding? = null
     private val binding get() = _binding!!
-    private var isChoiceSelected: Boolean? = true
+    private var isChoiceSelected: Boolean? = false
     private var rollNo: String? = ""
     private var choiceNo: Int = 0
     private lateinit var fragment: SearchSelectFragment
@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
         showSupportBar(true)
         binding.btnSendChoice.setOnClickListener {
             if (isChoiceSelected == true) {
-                registerStudent()
+                updateChoice()
             } else {
                 toast(this, "Plz select a choice...")
             }
@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun registerStudent() {
+    private fun updateChoice() {
         binding.btnSendChoice.isEnabled = false
         val updateChoiceRequest = UpdateChoiceRequest(
             rollNo = rollNo,
@@ -63,7 +63,38 @@ class HomeActivity : AppCompatActivity() {
         ApiService().updateChoice(updateChoiceRequest) {
             binding.btnSendChoice.isEnabled = true
             if (it?.isTrue == 1) {
-                toast(this, "hi")
+                val time = System.currentTimeMillis()
+                val bt = it.data.breakfastRecordTime
+                val b = it.data.breakfast
+                val lt = it.data.lunchRecordTime
+                val l = it.data.lunch
+                val st = it.data.snacksRecordTime
+                val s = it.data.snacks
+                val dt = it.data.dinnerRecordTime
+                val d = it.data.dinner
+                if (checkTime(bt.toLong(), time)) {
+                    binding.tvNextBreakFast.text = getChoice(b)
+                } else {
+                    binding.tvNextBreakFast.text = getChoice("")
+                }
+                if (checkTime(lt.toLong(), time)) {
+                    binding.tvNextLunch.text = getChoice(l)
+                } else {
+                    binding.tvNextLunch.text = getChoice("")
+                }
+                if (checkTime(st.toLong(), time)) {
+                    binding.tvNextSnacks.text = getChoice(s)
+                } else {
+                    binding.tvNextSnacks.text = getChoice("")
+                }
+                if (checkTime(dt.toLong(), time)) {
+                    binding.tvNextDinner.text = getChoice(d)
+                } else {
+                    binding.tvNextDinner.text = getChoice("")
+                }
+
+                toast(this, "your choice changed successfully")
+
             } else {
                 it?.msg?.let { it1 -> toast(this, it1) }
             }
@@ -84,17 +115,20 @@ class HomeActivity : AppCompatActivity() {
 
     public fun showSupportBar(b: Boolean) {
         if (b) {
+            binding.llOptions.visibility = View.VISIBLE
             binding.llButton.visibility = View.VISIBLE
             supportActionBar?.title = getString(R.string.app_name)
         } else {
             supportActionBar?.title = getString(R.string.select_your_choice)
             binding.llButton.visibility = View.GONE
+            binding.llOptions.visibility = View.GONE
         }
     }
 
     public fun setChoice(i: Int) {
         choiceNo = i
-        binding.tvMsg.text ="I will do "+CHOICE_NAME[i]
+        isChoiceSelected = true
+        binding.tvMsg.text = "I will do " + CHOICE_NAME[i]
         showSupportBar(true)
         supportFragmentManager
             .beginTransaction()

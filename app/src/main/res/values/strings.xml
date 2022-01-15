@@ -6,4 +6,8 @@
     <string name="login">Login</string>
     <string name="tap_here_to_select_choice">Tap here to select choice…</string>
     <string name="select_your_choice">Select your choice</string>
+    <string name="next_breakfast_choice">Next Breakfast Choice</string>
+    <string name="next_lunch_choice">Next Lunch Choice</string>
+    <string name="next_snacks_choice">Next Snacks Choice</string>
+    <string name="next_dinner_choice">Next Dinner Choice</string>
 </resources>
