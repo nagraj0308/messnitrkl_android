@@ -7,7 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nagraj.messnitrkl.R
 
-class SearchSelectAdapter(private val dataList: List<String>) :
+class SearchSelectAdapter(
+    private val dataList: ArrayList<String>,
+    private val mListener: (Int) -> Unit
+) :
+
     RecyclerView.Adapter<SearchSelectAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,15 +21,18 @@ class SearchSelectAdapter(private val dataList: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = dataList[position]
-        holder.tvData.text = data
+        holder.tvData.text = "I will do " + dataList[position]
+        holder.tvData.setOnClickListener {
+            mListener.invoke(position)
+        }
     }
 
     override fun getItemCount(): Int {
         return dataList.size
     }
 
+
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val tvData: TextView = itemView.findViewById(R.id.tv_data)
+        var tvData: TextView = itemView.findViewById(R.id.tv_data)
     }
 }

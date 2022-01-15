@@ -5,4 +5,5 @@
     <string name="hint_hostel">Select your hostel…</string>
     <string name="login">Login</string>
     <string name="tap_here_to_select_choice">Tap here to select choice…</string>
+    <string name="select_your_choice">Select your choice</string>
 </resources>
