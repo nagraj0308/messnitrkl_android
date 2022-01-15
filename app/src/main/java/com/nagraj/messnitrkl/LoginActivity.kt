@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun verify(): Boolean {
-        rollNo = binding.etRollNo.text.toString()
+        rollNo = binding.etRollNo.text.toString().uppercase()
         mobileNo = binding.etMobile.text.toString()
         if (rollNo.length != 9) {
             toast(this, "Please enter correct roll no..")

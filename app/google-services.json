@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "522592368552",
+    "project_id": "mess-nitrkl",
+    "storage_bucket": "mess-nitrkl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522592368552:android:b30e96d05afdab8a7f4f9d",
+        "android_client_info": {
+          "package_name": "com.nagraj.messnitrkl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522592368552-1cntmv0eoj5dvbgs4f08fq8hhb82bic4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAAoIxhCkq9Y6B9xfacJRffLdnpoKFEO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522592368552-1cntmv0eoj5dvbgs4f08fq8hhb82bic4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

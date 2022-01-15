@@ -64,7 +64,7 @@ class HomeActivity : AppCompatActivity() {
         )
         ApiService().updateChoice(updateChoiceRequest) {
             binding.btnSendChoice.isEnabled = true
-            if (it?.isTrue == 1) {
+            if (it?.isTrue == 1 && it.data != null) {
                 val time = System.currentTimeMillis()
                 val bt = it.data.breakfastRecordTime
                 val b = it.data.breakfast
@@ -110,7 +110,7 @@ class HomeActivity : AppCompatActivity() {
         )
         ApiService().getStudentChoice(getStudentChoiceRequest) {
             binding.btnSendChoice.isEnabled = true
-            if (it?.isTrue == 1) {
+            if (it?.isTrue == 1 && it.data != null) {
                 val time = System.currentTimeMillis()
                 val bt = it.data.breakfastRecordTime
                 val b = it.data.breakfast
