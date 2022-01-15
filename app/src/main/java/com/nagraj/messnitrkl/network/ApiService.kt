@@ -2,6 +2,8 @@ package com.nagraj.messnitrkl.network
 
 import com.nagraj.messnitrkl.network.register.request.RegisterRequest
 import com.nagraj.messnitrkl.network.register.response.RegisterResponse
+import com.nagraj.messnitrkl.network.getstudentchoice.request.GetStudentChoiceRequest
+import com.nagraj.messnitrkl.network.getstudentchoice.response.GetStudentChoiceResponse
 import com.nagraj.messnitrkl.network.updatechoice.request.UpdateChoiceRequest
 import com.nagraj.messnitrkl.network.updatechoice.response.UpdateChoiceResponse
 import retrofit2.Call
@@ -27,7 +29,10 @@ class ApiService {
             })
     }
 
-    fun updateChoice(updateChoiceRequest: UpdateChoiceRequest, onResult: (UpdateChoiceResponse?) -> Unit) {
+    fun updateChoice(
+        updateChoiceRequest: UpdateChoiceRequest,
+        onResult: (UpdateChoiceResponse?) -> Unit
+    ) {
         val retrofitBase = RetrofitBase.buildService(MessNITRKLService::class.java)
         retrofitBase.updateChoice(updateChoiceRequest)
             ?.enqueue(object : Callback<UpdateChoiceResponse?> {
@@ -39,6 +44,26 @@ class ApiService {
                 }
 
                 override fun onFailure(call: Call<UpdateChoiceResponse?>, t: Throwable) {
+                    onResult(null)
+                }
+            })
+    }
+
+    fun getStudentChoice(
+        getStudentChoiceRequest: GetStudentChoiceRequest,
+        onResult: (GetStudentChoiceResponse?) -> Unit
+    ) {
+        val retrofitBase = RetrofitBase.buildService(MessNITRKLService::class.java)
+        retrofitBase.getStudentChoices(getStudentChoiceRequest)
+            ?.enqueue(object : Callback<GetStudentChoiceResponse?> {
+                override fun onResponse(
+                    call: Call<GetStudentChoiceResponse?>,
+                    response: Response<GetStudentChoiceResponse?>
+                ) {
+                    onResult(response.body())
+                }
+
+                override fun onFailure(call: Call<GetStudentChoiceResponse?>, t: Throwable) {
                     onResult(null)
                 }
             })

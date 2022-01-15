@@ -13,6 +13,7 @@ import com.nagraj.messnitrkl.common.Constants.Companion.toast
 import com.nagraj.messnitrkl.common.DataStorePreference
 import com.nagraj.messnitrkl.databinding.ActivityHomeBinding
 import com.nagraj.messnitrkl.network.ApiService
+import com.nagraj.messnitrkl.network.getstudentchoice.request.GetStudentChoiceRequest
 import com.nagraj.messnitrkl.network.updatechoice.request.UpdateChoiceRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -49,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
                 .replace(R.id.frag_search_select, fragment)
                 .commit()
         };
+
         getStoreValues()
     }
 
@@ -101,6 +103,53 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun getStudentChoice() {
+        binding.btnSendChoice.isEnabled = false
+        val getStudentChoiceRequest = GetStudentChoiceRequest(
+            rollNo = rollNo,
+        )
+        ApiService().getStudentChoice(getStudentChoiceRequest) {
+            binding.btnSendChoice.isEnabled = true
+            if (it?.isTrue == 1) {
+                val time = System.currentTimeMillis()
+                val bt = it.data.breakfastRecordTime
+                val b = it.data.breakfast
+                val lt = it.data.lunchRecordTime
+                val l = it.data.lunch
+                val st = it.data.snacksRecordTime
+                val s = it.data.snacks
+                val dt = it.data.dinnerRecordTime
+                val d = it.data.dinner
+                if (checkTime(bt.toLong(), time)) {
+                    binding.tvNextBreakFast.text = getChoice(b)
+                } else {
+                    binding.tvNextBreakFast.text = getChoice("")
+                }
+                if (checkTime(lt.toLong(), time)) {
+                    binding.tvNextLunch.text = getChoice(l)
+                } else {
+                    binding.tvNextLunch.text = getChoice("")
+                }
+                if (checkTime(st.toLong(), time)) {
+                    binding.tvNextSnacks.text = getChoice(s)
+                } else {
+                    binding.tvNextSnacks.text = getChoice("")
+                }
+                if (checkTime(dt.toLong(), time)) {
+                    binding.tvNextDinner.text = getChoice(d)
+                } else {
+                    binding.tvNextDinner.text = getChoice("")
+                }
+
+                toast(this, "logged in successfully")
+
+            } else {
+                it?.msg?.let { it1 -> toast(this, it1) }
+            }
+        }
+    }
+
+
     private fun getStoreValues() {
         lifecycleScope.launch(
             Dispatchers.IO
@@ -108,6 +157,7 @@ class HomeActivity : AppCompatActivity() {
             dataStoreManager.getRollNo.collect {
                 withContext(Dispatchers.Main) {
                     rollNo = it
+                    getStudentChoice()
                 }
             }
         }

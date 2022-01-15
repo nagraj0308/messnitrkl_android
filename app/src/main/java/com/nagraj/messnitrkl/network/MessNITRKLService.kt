@@ -2,6 +2,8 @@ package com.nagraj.messnitrkl.network
 
 import com.nagraj.messnitrkl.network.register.request.RegisterRequest
 import com.nagraj.messnitrkl.network.register.response.RegisterResponse
+import com.nagraj.messnitrkl.network.getstudentchoice.request.GetStudentChoiceRequest
+import com.nagraj.messnitrkl.network.getstudentchoice.response.GetStudentChoiceResponse
 import com.nagraj.messnitrkl.network.updatechoice.request.UpdateChoiceRequest
 import com.nagraj.messnitrkl.network.updatechoice.response.UpdateChoiceResponse
 import retrofit2.Call
@@ -17,4 +19,8 @@ interface MessNITRKLService {
     @Headers("Content-Type: application/json")
     @POST("/api/update_student_choice/")
     fun updateChoice(@Body request: UpdateChoiceRequest?): Call<UpdateChoiceResponse?>?
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/get_student_choices/")
+    fun getStudentChoices(@Body request: GetStudentChoiceRequest?): Call<GetStudentChoiceResponse?>?
 }
