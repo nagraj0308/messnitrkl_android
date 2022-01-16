@@ -46,7 +46,7 @@ class Constants {
             } else if (s == "") {
                 return "----"
             } else {
-                return "No Taking"
+                return "Not Taking"
             }
         }
 
