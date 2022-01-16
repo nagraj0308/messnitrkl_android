@@ -94,7 +94,7 @@ class HomeActivity : AppCompatActivity() {
                 } else {
                     binding.tvNextDinner.text = getChoice("")
                 }
-
+                binding.tvMsg.text = getString(R.string.tap_here_to_select_choice)
                 toast(this, "your choice changed successfully")
 
             } else {

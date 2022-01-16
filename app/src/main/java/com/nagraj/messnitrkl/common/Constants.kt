@@ -44,9 +44,9 @@ class Constants {
             } else if (s == "YR") {
                 return "Non Veg"
             } else if (s == "") {
-                return "Non option selected"
+                return "----"
             } else {
-                return "No"
+                return "No Taking"
             }
         }
 

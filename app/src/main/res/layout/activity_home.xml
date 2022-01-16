@@ -38,14 +38,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorSecondary" />
+                    android:background="@color/noColor" />
 
                 <TextView
                     android:id="@+id/tv_next_break_fast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
-                    android:text="Non Veg"
                     android:textSize="@dimen/text_size_small"
                     android:textStyle="bold" />
 
@@ -70,14 +69,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorSecondary" />
+                    android:background="@color/noColor" />
 
                 <TextView
                     android:id="@+id/tv_next_lunch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
-                    android:text="Non Veg"
                     android:textSize="@dimen/text_size_small"
                     android:textStyle="bold" />
 
@@ -102,14 +100,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorSecondary" />
+                    android:background="@color/noColor" />
 
                 <TextView
                     android:id="@+id/tv_next_snacks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
-                    android:text="Non Veg"
                     android:textSize="@dimen/text_size_small"
                     android:textStyle="bold" />
 
@@ -134,14 +131,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorSecondary" />
+                    android:background="@color/noColor" />
 
                 <TextView
                     android:id="@+id/tv_next_dinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
-                    android:text="Non Veg"
                     android:textSize="@dimen/text_size_small"
                     android:textStyle="bold" />
 
