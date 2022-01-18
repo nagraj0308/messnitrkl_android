@@ -7,7 +7,7 @@ import android.widget.Toast
 class Constants {
     companion object {
         val HOSTELS = arrayOf("CVR", "DBA", "GDB", "HB", "KMS", "MSS", "SD", "VS")
-        val BASE_URL = "https://messnitrkl.herokuapp.com"
+        val BASE_URL = "https://messnitrklserver.herokuapp.com"
 
         val CHOICE_CODE = arrayOf(
             "BYG",
