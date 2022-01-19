@@ -18,12 +18,14 @@ import kotlinx.coroutines.launch
 
 
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var dataStoreManager: DataStorePreference
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding!!
     private var selectedHostel = Constants.HOSTELS[0]
     private var rollNo: String = ""
     private var mobileNo: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,12 +81,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun registerStudent() {
         binding.btnLogin.isEnabled = false
+        binding.progressBar.visibility = View.VISIBLE
         val registerRequest = RegisterRequest(
             rollNo = rollNo,
             mobileNo = mobileNo,
             hostel = selectedHostel,
         )
         ApiService().registerStudent(registerRequest) {
+            binding.progressBar.visibility = View.GONE
             binding.btnLogin.isEnabled = true
             if (it != null) {
                 if (it.isTrue == 1) {

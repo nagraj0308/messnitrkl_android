@@ -57,12 +57,14 @@ class HomeActivity : AppCompatActivity() {
 
     private fun updateChoice() {
         binding.btnSendChoice.isEnabled = false
+        binding.progressBar.visibility = View.VISIBLE
         val updateChoiceRequest = UpdateChoiceRequest(
             rollNo = rollNo,
             choiceCode = CHOICE_CODE[choiceNo],
             recordTime = System.currentTimeMillis().toString(),
         )
         ApiService().updateChoice(updateChoiceRequest) {
+            binding.progressBar.visibility = View.GONE
             binding.btnSendChoice.isEnabled = true
             if (it?.isTrue == 1 && it.data != null) {
                 val time = System.currentTimeMillis()
@@ -104,12 +106,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getStudentChoice() {
+        binding.progressBar.visibility = View.VISIBLE
         binding.btnSendChoice.isEnabled = false
         val getStudentChoiceRequest = GetStudentChoiceRequest(
             rollNo = rollNo,
         )
         ApiService().getStudentChoice(getStudentChoiceRequest) {
             binding.btnSendChoice.isEnabled = true
+            binding.progressBar.visibility = View.GONE
             if (it?.isTrue == 1 && it.data != null) {
                 val time = System.currentTimeMillis()
                 val bt = it.data.breakfastRecordTime
