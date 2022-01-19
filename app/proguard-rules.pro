@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class com.nagraj.messnitrkl.** { *; }
+-keep class com.nagraj.messnitrkl.LoginActivity
+-keep class com.nagraj.messnitrkl.HomeActivity
+-keep class com.nagraj.messnitrkl.select.SearchSelectFragment
+-keep class com.nagraj.messnitrkl.select.SearchSelectAdapter
+-keep class com.nagraj.messnitrkl.common.Constants
+-keep class com.nagraj.messnitrkl.* {*;}

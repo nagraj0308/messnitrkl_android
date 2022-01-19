@@ -65,11 +65,12 @@ class Constants {
         }
 
         public fun toast(context: Context, msg: String) {
+
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         }
 
         public fun log(msg: String) {
-            Log.d("NAGRAJ", "log: $msg")
+            Log.d("NAGA", "log: $msg")
         }
     }
 }

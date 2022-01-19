@@ -79,21 +79,26 @@ class LoginActivity : AppCompatActivity() {
 
     private fun registerStudent() {
         binding.btnLogin.isEnabled = false
-        val apiService = ApiService()
         val registerRequest = RegisterRequest(
             rollNo = rollNo,
             mobileNo = mobileNo,
             hostel = selectedHostel,
         )
-        apiService.registerStudent(registerRequest) {
+        ApiService().registerStudent(registerRequest) {
             binding.btnLogin.isEnabled = true
-            if (it?.isTrue == 1) {
-                lifecycleScope.launch {
-                    setStoreValues(rollNo, mobileNo, selectedHostel)
+            if (it != null) {
+                if (it.isTrue == 1) {
+                    lifecycleScope.launch {
+                        setStoreValues(rollNo, mobileNo, selectedHostel)
+                        gotoHomePage()
+                    }
+                } else {
+                    if (it.msg != null) {
+                        toast(this, it.msg)
+                    }
                 }
-                gotoHomePage()
             } else {
-                it?.msg?.let { it1 -> toast(this, it1) }
+                toast(this, "No data")
             }
         }
     }
