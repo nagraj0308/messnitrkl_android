@@ -9,7 +9,6 @@ data class Data(
     val hostel: String,
     val lunch: String,
     val lunchRecordTime: String,
-    val mobileNo: String,
     val snacks: String,
     val snacksRecordTime: String
 )

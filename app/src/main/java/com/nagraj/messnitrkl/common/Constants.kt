@@ -55,7 +55,6 @@ class Constants {
         val DATASTORE_NAME = "credentials"
         val PREF_IS_LOGGED_IN = "pref_is_logged_in"
         val PREF_HOSTEL = "pref_hostel"
-        val PREF_MOBILE_NO = "pref_mobile_no"
         val PREF_ROLL_NO = "pref_roll_no"
 
         //time calculation

@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private var selectedHostel = Constants.HOSTELS[0]
     private var rollNo: String = ""
-    private var mobileNo: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,13 +60,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun verify(): Boolean {
         rollNo = binding.etRollNo.text.toString().uppercase()
-        mobileNo = binding.etMobile.text.toString()
         if (rollNo.length != 9) {
             toast(this, "Please enter correct roll no..")
-            return false
-        }
-        if (mobileNo.length != 10) {
-            toast(this, "Please enter correct mobile no..")
             return false
         }
         return true
@@ -84,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
         val registerRequest = RegisterRequest(
             rollNo = rollNo,
-            mobileNo = mobileNo,
             hostel = selectedHostel,
         )
         ApiService().registerStudent(registerRequest) {
@@ -93,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
             if (it != null) {
                 if (it.isTrue == 1) {
                     lifecycleScope.launch {
-                        setStoreValues(rollNo, mobileNo, selectedHostel)
+                        setStoreValues(rollNo,selectedHostel)
                         gotoHomePage()
                     }
                 } else {
@@ -109,13 +102,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setStoreValues(
         rollNo: String,
-        mobileNo: String,
         hostel: String
     ) {
         lifecycleScope.launch(Dispatchers.IO) {
             dataStoreManager.setLoggedIn(true)
             dataStoreManager.setHostel(hostel)
-            dataStoreManager.setMobileNo(mobileNo)
             dataStoreManager.setRollNo(rollNo)
         }
     }

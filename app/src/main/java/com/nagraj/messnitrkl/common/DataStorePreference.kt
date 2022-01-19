@@ -14,7 +14,6 @@ class DataStorePreference(private val context: Context) {
     companion object{
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.DATASTORE_NAME)
         private val PREF_KEY_HOSTEL = stringPreferencesKey(Constants.PREF_HOSTEL)
-        private val PREF_KEY_MOBILE_NO  = stringPreferencesKey(Constants.PREF_MOBILE_NO)
         private val PREF_KEY_ROLL_NO  = stringPreferencesKey(Constants.PREF_ROLL_NO)
         private val PREF_KEY_IS_LOGGED_IN= booleanPreferencesKey(Constants.PREF_IS_LOGGED_IN)
     }
@@ -35,15 +34,6 @@ class DataStorePreference(private val context: Context) {
 
     suspend fun setRollNo(value: String) {
         context.dataStore.edit { it[PREF_KEY_ROLL_NO] = value }
-    }
-
-    val getMobileNo: Flow<String>
-        get() = context.dataStore.data.map {
-            it[PREF_KEY_MOBILE_NO] ?:""
-        }
-
-    suspend fun setMobileNo(value: String) {
-        context.dataStore.edit { it[PREF_KEY_MOBILE_NO] = value }
     }
 
     val isLoggedIn: Flow<Boolean>
