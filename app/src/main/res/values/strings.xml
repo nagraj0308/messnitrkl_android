@@ -2,12 +2,12 @@
     <string name="app_name">Mess NITRKL</string>
     <string name="hint_roll_no">Enter roll no…</string>
     <string name="hint_mobile_no">Enter mobile no…</string>
-    <string name="hint_hostel">Select your hostel…</string>
     <string name="login">Login</string>
     <string name="tap_here_to_select_choice">Tap here to select choice…</string>
     <string name="select_your_choice">Select your choice</string>
-    <string name="next_breakfast_choice">Next Breakfast Choice : </string>
-    <string name="next_lunch_choice">Next Lunch Choice : </string>
-    <string name="next_snacks_choice">Next Snacks Choice : </string>
-    <string name="next_dinner_choice">Next Dinner Choice : </string>
+    <string name="label_next_breakfast_status">Next Breakfast Status</string>
+    <string name="label_next_lunch_status">Next Lunch Status</string>
+    <string name="label_next_snacks_status">Next Snacks Status</string>
+    <string name="label_next_dinner_status">Next Dinner Status</string>
+    <string name="hint_change_choice">Change</string>
 </resources>
