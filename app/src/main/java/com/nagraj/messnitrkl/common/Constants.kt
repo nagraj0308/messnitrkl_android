@@ -33,7 +33,7 @@ class Constants {
             "Change",
             "Veg",
             "Non Veg",
-            "Nothing",
+            "Not Taking",
         )
 
         fun getChoice(s: String): String {

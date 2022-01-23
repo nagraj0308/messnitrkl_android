@@ -3,6 +3,7 @@
     <string name="hint_roll_no">Enter roll no…</string>
     <string name="hint_mobile_no">Enter mobile no…</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="tap_here_to_select_choice">Tap here to select choice…</string>
     <string name="select_your_choice">Select your choice</string>
     <string name="label_next_breakfast_status">Next Breakfast Status</string>

@@ -1,6 +1,7 @@
 package com.nagraj.messnitrkl
 
 import android.R
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,12 +24,11 @@ import kotlinx.coroutines.withContext
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var dataStoreManager: DataStorePreference
-    private var _binding: ActivityHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityHomeBinding
     private var rollNo: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dataStoreManager = DataStorePreference(this)
         ArrayAdapter(
@@ -62,29 +62,47 @@ class HomeActivity : AppCompatActivity() {
 
             }
         }
-        binding.spChangeSnacks.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2 != 0) {
-                    updateChoice("S" + Constants.CHOICE[p2 - 1])
+        binding.spChangeSnacks.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    if (p2 != 0) {
+                        updateChoice("S" + Constants.CHOICE[p2 - 1])
+                    }
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
                 }
             }
+        binding.spChangeDinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    if (p2 != 0) {
+                        updateChoice("D" + Constants.CHOICE[p2 - 1])
+                    }
+                }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
 
-            }
-        }
-        binding.spChangeDinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2 != 0) {
-                    updateChoice("D" + Constants.CHOICE[p2 - 1])
                 }
             }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
+        binding.btnLogout.setOnClickListener {
+            logOut()
+        };
         getStoreValues()
+    }
+
+    private fun logOut() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            dataStoreManager.setLogout()
+            gotoLoginPage()
+        }
+    }
+
+    private fun gotoLoginPage() {
+        val loginActivity = Intent(this, LoginActivity::class.java)
+        finish()
+        startActivity(loginActivity)
     }
 
 
@@ -139,17 +157,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun enableAllSpinner(b: Boolean) {
-        binding.spChangeBf.isEnabled = b
-        binding.spChangeLunch.isEnabled = b
-        binding.spChangeSnacks.isEnabled = b
-        binding.spChangeDinner.isEnabled = b
+        if (binding != null) {
+            binding.spChangeBf.isEnabled = b
+            binding.spChangeLunch.isEnabled = b
+            binding.spChangeSnacks.isEnabled = b
+            binding.spChangeDinner.isEnabled = b
+        }
     }
 
     private fun setToChangeAllSpinner() {
-        binding.spChangeBf.setSelection(0)
-        binding.spChangeLunch.setSelection(0)
-        binding.spChangeSnacks.setSelection(0)
-        binding.spChangeDinner.setSelection(0)
+        if (binding != null) {
+            binding.spChangeBf.setSelection(0)
+            binding.spChangeLunch.setSelection(0)
+            binding.spChangeSnacks.setSelection(0)
+            binding.spChangeDinner.setSelection(0)
+        }
     }
 
 
@@ -195,8 +217,6 @@ class HomeActivity : AppCompatActivity() {
 
                 toast(this, "logged in successfully")
 
-            } else {
-                it?.msg?.let { it1 -> toast(this, it1) }
             }
         }
     }
@@ -214,8 +234,4 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }
