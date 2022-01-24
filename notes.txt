@@ -1,2 +1,5 @@
 bugs:
-3.remove border and put shadow to card and button
+1.remove border and put shadow to card and button
+2.mess menu
+3.share
+4.rating
