@@ -8,6 +8,7 @@ class Constants {
     companion object {
         val HOSTELS = arrayOf("CVR", "DBA", "GDB", "HB", "KMS", "MSS", "SD", "VS")
         const val BASE_URL = "https://messnitrklserver.herokuapp.com"
+        const val APK_SHARE_MSG = "Hey!! I am using our app Mess NITRKL for saving food please you also install, link:- https://play.google.com/store/apps/details?id=com.nagraj.messnitrkl Thanks!!"
 
         val CHOICE_CODE = arrayOf(
             "BYG",
@@ -61,7 +62,7 @@ class Constants {
             return (t1 + ms_in_24hr) > t2
         }
 
-        fun toast(context: Context, msg: String) {
+        fun toast(context: Context?, msg: String) {
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         }
 

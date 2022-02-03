@@ -78,10 +78,10 @@ class LoginActivity : AppCompatActivity() {
         return true
     }
 
-    private fun gotoHomePage() {
-        val homeActivity = Intent(this, HomeActivity::class.java)
+    private fun gotoAppPage() {
+        val appActivity = Intent(this, AppActivity::class.java)
         finish()
-        startActivity(homeActivity)
+        startActivity(appActivity)
     }
 
     private fun registerStudent() {
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                 if (it.isTrue == 1) {
                     lifecycleScope.launch {
                         setStoreValues(rollNo, selectedHostel)
-                        gotoHomePage()
+                        gotoAppPage()
                     }
                 } else {
                     if (it.msg != null) {

@@ -1,27 +1,40 @@
 package com.nagraj.messnitrkl.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.google.android.material.navigation.NavigationView
 import com.nagraj.messnitrkl.R
 import com.nagraj.messnitrkl.common.Constants
+import com.nagraj.messnitrkl.common.DataStorePreference
 import com.nagraj.messnitrkl.databinding.ActivityAppBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class AppActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAppBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
-
+    private lateinit var dataStoreManager: DataStorePreference
+    private var rollNo: String? = ""
+    private var hostel: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dataStoreManager = DataStorePreference(this)
         setSupportActionBar(binding.appBarMain.toolbar)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -48,7 +61,7 @@ class AppActivity : AppCompatActivity() {
                         true
                     }
                     R.id.nav_logout -> {
-                        logout()
+                        logOut()
                         true
                     }
                     else -> false
@@ -56,8 +69,8 @@ class AppActivity : AppCompatActivity() {
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             handled;
-
         }
+        getStoreValues()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -66,14 +79,63 @@ class AppActivity : AppCompatActivity() {
     }
 
     private fun share() {
-        Constants.toast(this, "share");
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, Constants.APK_SHARE_MSG)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, "Share my app")
+        startActivity(shareIntent)
     }
 
     private fun rateUs() {
-        Constants.toast(this, "rate");
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+            )
+        )
     }
 
-    private fun logout() {
-        Constants.toast(this, "logout");
+    private fun logOut() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            dataStoreManager.setLogout()
+            gotoLoginPage()
+        }
     }
+
+    private fun gotoLoginPage() {
+        val loginActivity = Intent(this, LoginActivity::class.java)
+        finish()
+        startActivity(loginActivity)
+    }
+
+    private fun getStoreValues() {
+        val header: View = binding.navView.getHeaderView(0)
+        lifecycleScope.launch(
+            Dispatchers.IO
+        ) {
+            dataStoreManager.getHostel.collect {
+                withContext(Dispatchers.Main) {
+                    hostel = it
+                    val tvHostel: TextView = header.findViewById(R.id.tv_hostel);
+                    tvHostel.text = hostel
+                }
+            }
+        }
+
+        lifecycleScope.launch(
+            Dispatchers.IO
+        ) {
+            dataStoreManager.getRollNo.collect {
+                withContext(Dispatchers.Main) {
+                    rollNo = it
+                    val tvRollNo: TextView = header.findViewById(R.id.tv_roll_no);
+                    tvRollNo.text = rollNo
+                }
+            }
+        }
+    }
+
 }
