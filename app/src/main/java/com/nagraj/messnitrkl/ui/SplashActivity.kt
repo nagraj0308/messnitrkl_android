@@ -1,4 +1,4 @@
-package com.nagraj.messnitrkl
+package com.nagraj.messnitrkl.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun gotoHomeActivity() {
-        val homeActivity = Intent(this, HomeActivity::class.java)
+        val homeActivity = Intent(this, AppActivity::class.java)
         finish()
         startActivity(homeActivity)
     }

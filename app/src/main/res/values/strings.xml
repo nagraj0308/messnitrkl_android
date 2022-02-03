@@ -3,12 +3,22 @@
     <string name="hint_roll_no">Enter roll no…</string>
     <string name="hint_mobile_no">Enter mobile no…</string>
     <string name="login">Login</string>
-    <string name="logout">Logout</string>
-    <string name="tap_here_to_select_choice">Tap here to select choice…</string>
-    <string name="select_your_choice">Select your choice</string>
     <string name="label_next_breakfast_status">Next Breakfast Status</string>
     <string name="label_next_lunch_status">Next Lunch Status</string>
     <string name="label_next_snacks_status">Next Snacks Status</string>
     <string name="label_next_dinner_status">Next Dinner Status</string>
+    <string name="select_your_choice">Select your choice</string>
+    <string name="tap_here_to_select_choice">Tap here to select choice…</string>
     <string name="hint_change_choice">Change</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!--    Drawer Menus-->
+    <string name="menu_home">Home</string>
+    <string name="menu_complete_menu">Complete Menu</string>
+    <string name="menu_faqs">FAQs</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_rate_us">Rate Us</string>
+    <string name="menu_logout">Logout</string>
+
 </resources>

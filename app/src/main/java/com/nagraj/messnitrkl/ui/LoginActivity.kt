@@ -1,4 +1,4 @@
-package com.nagraj.messnitrkl
+package com.nagraj.messnitrkl.ui
 
 import android.content.Context
 import android.content.Intent

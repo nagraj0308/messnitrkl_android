@@ -1,13 +1,14 @@
-package com.nagraj.messnitrkl
-
-import android.R
+package com.nagraj.messnitrkl.ui
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.nagraj.messnitrkl.R
 import com.nagraj.messnitrkl.common.Constants
 import com.nagraj.messnitrkl.common.Constants.Companion.checkTime
 import com.nagraj.messnitrkl.common.Constants.Companion.getChoice
@@ -22,19 +23,28 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class HomeActivity : AppCompatActivity() {
     private lateinit var dataStoreManager: DataStorePreference
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var rollNo: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dataStoreManager = DataStorePreference(this)
+        actionBarDrawerToggle =
+            ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+
+        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBarDrawerToggle.syncState()
+
         ArrayAdapter(
-            this, R.layout.simple_list_item_1, Constants.CHOICE_SP
+            this, R.layout.view_spinner, Constants.CHOICE_SP
         ).also {
-            it.setDropDownViewResource(R.layout.simple_expandable_list_item_1)
+            it.setDropDownViewResource(R.layout.item_spinner)
             binding.spChangeBf.adapter = it
             binding.spChangeLunch.adapter = it
             binding.spChangeSnacks.adapter = it
@@ -46,7 +56,6 @@ class HomeActivity : AppCompatActivity() {
                     updateChoice("B" + Constants.CHOICE[p2 - 1])
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
@@ -91,6 +100,7 @@ class HomeActivity : AppCompatActivity() {
         };
         getStoreValues()
     }
+
 
     private fun logOut() {
         lifecycleScope.launch(Dispatchers.IO) {

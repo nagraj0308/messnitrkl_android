@@ -14,4 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+    <style name="Theme.Messnitrkl_android.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Messnitrkl_android.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Messnitrkl_android.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

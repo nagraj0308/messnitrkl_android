@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.nagraj.messnitrkl"
-        minSdk 23
+        minSdk 26
         targetSdk 31
         versionCode 23220202
         versionName "22.02.02"
@@ -57,12 +57,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
 
     // Preferences DataStore (SharedPreferences like APIs)
     implementation "androidx.datastore:datastore-preferences:1.0.0"
@@ -71,8 +74,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.0'
 
     //Retrofit and OKHTTP3
