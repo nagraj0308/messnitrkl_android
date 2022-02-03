@@ -21,6 +21,5 @@
 #-renamesourcefileattribute SourceFile
 -keep class com.nagraj.messnitrkl.** { *; }
 -keep class com.nagraj.messnitrkl.ui.LoginActivity
--keep class com.nagraj.messnitrkl.ui.HomeActivity
 -keep class com.nagraj.messnitrkl.common.Constants
 -keep class com.nagraj.messnitrkl.* {*;}
