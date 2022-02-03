@@ -22,7 +22,5 @@
 -keep class com.nagraj.messnitrkl.** { *; }
 -keep class com.nagraj.messnitrkl.ui.LoginActivity
 -keep class com.nagraj.messnitrkl.ui.HomeActivity
--keep class com.nagraj.messnitrkl.select.SearchSelectFragment
--keep class com.nagraj.messnitrkl.select.SearchSelectAdapter
 -keep class com.nagraj.messnitrkl.common.Constants
 -keep class com.nagraj.messnitrkl.* {*;}
