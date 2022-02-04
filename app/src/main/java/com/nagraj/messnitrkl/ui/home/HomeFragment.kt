@@ -40,9 +40,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         dataStoreManager = context?.let { DataStorePreference(it) }!!
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-//        homeViewModel.rollNo.observe(viewLifecycleOwner) {
-//            rollNo = it
-//        }
+
 
 
         ArrayAdapter(
@@ -184,6 +182,12 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+//    private fun get() {
+//        homeViewModel.getChoice(rollNo).observe(viewLifecycleOwner) {
+//
+//        }
+//    }
 
     private fun getStudentChoice() {
         binding.progressBar.visibility = View.VISIBLE
