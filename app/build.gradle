@@ -12,8 +12,8 @@ android {
         applicationId "com.nagraj.messnitrkl"
         minSdk 26
         targetSdk 31
-        versionCode 23220203
-        versionName "22.02.03"
+        versionCode 26220204
+        versionName "22.02.04"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
