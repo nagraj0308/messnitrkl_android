@@ -1,6 +1,8 @@
 package com.nagraj.messnitrkl.ui.faqs
 
 import android.os.Bundle
+import android.text.Html
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,14 +21,15 @@ class FaqsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val faqsViewModel =
-            ViewModelProvider(this).get(FaqsViewModel::class.java)
+            ViewModelProvider(this)[FaqsViewModel::class.java]
 
         binding = FragmentFaqsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
+        val textView: TextView = binding.tvFaqs
+        textView.movementMethod= ScrollingMovementMethod()
         faqsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            textView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
         }
         return root
     }
